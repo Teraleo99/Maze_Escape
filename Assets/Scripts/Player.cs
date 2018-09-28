@@ -7,7 +7,10 @@ public class Player : MonoBehaviour {
     // Designer variables
     public float speed = 10;
 
-    public Rigidbody2D physicsBody; 
+    public Rigidbody2D physicsBody;
+
+    public string horizontalAxis = "Horizontal";
+    public string verticalAxia = "Vertical"; 
 
 	// Use this for initialization
 	void Start () {
@@ -32,4 +35,13 @@ public class Player : MonoBehaviour {
         // Give the velocity to the rigidbody
         physicsBody.velocity = velocity;
 	}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Check if thing bumped into is enemy
+        if (collision.collider.GetComponent<Enemy>())
+        {
+            //Die on collision
+            Destroy(gameObject);
+        }
+    }
 }
